@@ -1,9 +1,9 @@
-/* eslint-disable react/jsx-key */
 import React from 'react';
 import { FiChevronsRight } from 'react-icons/fi';
 import { Title, Form, Repos, Error } from './styles';
 import logo from '../../assets/logo.svg';
 import { api } from '../../services/api';
+import { Link } from 'react-router-dom';
 
 interface GithubRepository {
   full_name: string;
@@ -64,7 +64,10 @@ export const Dashboard: React.FC = () => {
 
       <Repos>
         {repo.map(repository => (
-          <a href="/repositorios" key={repository.full_name}>
+          <Link
+            to={`/repositorios/${repository.full_name}`}
+            key={repository.full_name}
+          >
             <img
               src={repository.owner.avatar_url}
               alt={repository.owner.login}
@@ -74,7 +77,7 @@ export const Dashboard: React.FC = () => {
               <p>{repository.description}</p>
             </div>
             <FiChevronsRight size={20} />
-          </a>
+          </Link>
         ))}
       </Repos>
     </>
