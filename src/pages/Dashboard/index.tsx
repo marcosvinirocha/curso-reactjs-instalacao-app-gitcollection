@@ -14,7 +14,7 @@ interface GithubRepository {
   };
 }
 
-export const Dashboard: React.FC = () => {
+const Dashboard: React.FC = () => {
   const [repo, setRepo] = React.useState<GithubRepository[]>(() => {
     const storageRepo = localStorage.getItem('@GitCollection:repositories');
     if (storageRepo) {
@@ -74,10 +74,10 @@ export const Dashboard: React.FC = () => {
       {inputError && <Error>{inputError}</Error>}
 
       <Repos>
-        {repo.map(repository => (
+        {repo.map((repository, index) => (
           <Link
             to={`/repositorios/${repository.full_name}`}
-            key={repository.full_name}
+            key={repository.full_name + index}
           >
             <img
               src={repository.owner.avatar_url}
@@ -94,3 +94,5 @@ export const Dashboard: React.FC = () => {
     </>
   );
 };
+
+export default Dashboard;
